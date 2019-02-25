@@ -4,7 +4,7 @@
 Raspberry Pi 3
 ##############
 `Sequitur Labs`_ did the initial OP-TEE port which at the time also came with
-modifications in U-Boot, Trusted Firmware A and Linux kernel. Since that initial
+modifications in U-Boot, Trusted Firmware-A and Linux kernel. Since that initial
 port more and more patches have found mainline trees and today the OP-TEE setup
 for Raspberry Pi 3 uses only upstream tree's with the exception of Linux kernel.
 
@@ -13,7 +13,7 @@ Disclaimer
 **********
 .. warning::
 
-    This port of Trusted Firmware A and OP-TEE to Raspberry Pi 3 **IS NOT
+    This port of Trusted Firmware-A and OP-TEE to Raspberry Pi 3 **IS NOT
     SECURE!** Although the Raspberry Pi3 processor provides ARM TrustZone
     exception states, the mechanisms and hardware required to implement secure
     boot, memory, peripherals or other secure functions are not available. Use
@@ -127,7 +127,7 @@ for prototyping and to learn how to build and use those. That kind of knowledge
 can later on be transferred and used on other devices which have all the
 necessary secure capabilities needed to make a secure system. We haven't tested
 to enable secure boot on Raspberry Pi 3. But we believe that a good starting
-point would be Trusted Firmware A's documentation about the "`Authentication
+point would be Trusted Firmware-A's documentation about the "`Authentication
 Framework`_" and `RPi3 in TF-A`_.
 
 

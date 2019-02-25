@@ -67,7 +67,7 @@ point. For instance, `core/arch/arm/plat-hikey/conf.mk`_.
 
 The platform ``conf.mk`` file should at least define the default platform flavor
 for the platform, the core configurations (architecture and number of cores),
-the main configuration directives (generic boot, arm trusted firmware support,
+the main configuration directives (generic boot, Arm Trusted Firmware-A support,
 generic time source, console driver, etc...) and some platform default
 configuration settings.
 
@@ -308,10 +308,10 @@ example when it is hard for us to do this in a generic way since device
 manufacturers all tend to do this in their own unique way and they are not very
 keen on sharing their low level boot details and security implementation with
 the rest of the world. This is especially true on ARMv7-A. For ARMv8-A it looks
-bit better, since Arm in Trusted Firmware A have implemented and defined how a
+bit better, since Arm in Trusted Firmware-A have implemented and defined how a
 abstract the chain of trust (see auth-framework.rst_).
 We have successfully verified OP-TEE by using the authentication framework from
-Trusted Firmware A (see :ref:`secure_boot` for the details).
+Trusted Firmware-A (see :ref:`secure_boot` for the details).
 
 Hardware Crypto IP
 ******************
@@ -353,7 +353,7 @@ talking about the following lines:
 The only function that actually does something there is the ``cpu_on`` function,
 the rest of them are stubbed. The main reason for that is because we think that
 how to suspend and resume is a device dependent thing. The code in OP-TEE is
-prepared so that callbacks etc from Trusted Firmware A will be routed to OP-TEE,
+prepared so that callbacks etc from Trusted Firmware-A will be routed to OP-TEE,
 but since the function(s) are just stubbed we will not do anything and just
 return. In a real production device, you would probably want to save and restore
 CPU states, secure hardware IPs' registers and TZASC and other memory firewall
@@ -369,7 +369,7 @@ will perform security checks on transactions to memory or peripherals. It is not
 always the case that TZASC is on a device, in some cases the SoC has developed
 something equivalent. In OP-TEE this is very well reflected, i.e., different
 platforms have different ways of protecting their memory. On ARMv8-A platforms
-we are in most of the cases using Trusted Firmware A as the boot firmware and
+we are in most of the cases using Trusted Firmware-A as the boot firmware and
 there the secure bootloader is the one that configures secure vs non-secure
 memory using TZASC (see plat_arm_security_setup_ in TF-A). The takeaway here is
 that you must make sure that you have configured whatever memory firewall your

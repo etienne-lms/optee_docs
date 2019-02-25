@@ -7,7 +7,7 @@ Secure boot
 Armv8-A - Using the authentication framework in TF-A
 ****************************************************
 This section gives a brief description on how to enable the verification of
-OP-TEE using the authentication framework in Trusted Firmware A (TF-A), i.e.,
+OP-TEE using the authentication framework in Trusted Firmware-A (TF-A), i.e.,
 something that could be used in an Armv8-A environment.
 
 According to user-guide.rst_, there is no additional specific build options for

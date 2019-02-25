@@ -52,7 +52,7 @@ prefetch, undef) are local to the Monitor execution.
 The Monitor can be external to optee_os (case ``CFG_WITH_ARM_TRUSTED_FW=y``).
 If not, provides a local secure monitor ``core/arch/arm/sm``. Armv7-A platforms
 should use the optee_os secure monitor. Armv8-A platforms are likely to rely on
-an `Trusted Firmware A`_.
+an `Trusted Firmware-A`_.
 
 When executing outside the Monitor, the system is executing either in the
 normal world (``SCR_NS=1``) or in the secure world (``SCR_NS=0``). Each world
@@ -1038,4 +1038,4 @@ Condvar
 .. _ARM_DEN0028A_SMC_Calling_Convention: http://infocenter.arm.com/help/topic/com.arm.doc.den0028b/ARM_DEN0028B_SMC_Calling_Convention.pdf
 .. _Cortex-A53 TRM: http://infocenter.arm.com/help/topic/com.arm.doc.ddi0500j/DDI0500J_cortex_a53_trm.pdf
 .. _drivers/tee/optee: https://github.com/torvalds/linux/tree/master/drivers/tee/optee
-.. _Trusted Firmware A: https://github.com/ARM-software/arm-trusted-firmware
+.. _Trusted Firmware-A: https://github.com/ARM-software/arm-trusted-firmware
