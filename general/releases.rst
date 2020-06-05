@@ -80,6 +80,10 @@ tl;dr
       - git tag -a 3.x.y -m "3.x.y"
 
     * - Release day
+      - Create release tag in linaro-swg/linux.git
+      - git tag -a optee-3.x.y -m "optee-3.x.y"
+
+    * - Release day
       - Create release branch in :ref:`manifest`
       - git checkout -b 3.x.y origin/master
 
@@ -146,12 +150,16 @@ Long version
 
             You can use the same steps as in step 4, when creating the tags.
 
-    10. Create a new branch in :ref:`manifest` from ``master`` where the name
+    10. Create an OP-TEE specific release tag (annotated tag, i.e., ``git tag -a
+        optee-3.x.y -m "optee-3.x.y"``) in the Linaro SWG Linux kernel repository
+        `linaro-swg/linux.git`_ which is used by many supported platforms.
+
+    11. Create a new branch in :ref:`manifest` from ``master`` where the name
         corresponds to the release you are preparing. I.e., ``git checkout -b
         3.x.y origin/master``.
 
 
-    11. Update all :ref:`manifest` XML-files in the :ref:`manifest` git, so they
+    12. Update all :ref:`manifest` XML-files in the :ref:`manifest` git, so they
         refer to the tag in the release we are working with (see `3.6.0 stable`_
         commit as an example). This can be done with the make_stable.sh_ script.
         Now it is also time to push the new branch and tag it. Example:
@@ -168,7 +176,7 @@ Long version
             $ git tag -a $VER -m $VER
             $ git push upstream tag $VER
 
-    12. Send a last email to maintainers and other stakeholders telling that the
+    13. Send a last email to maintainers and other stakeholders telling that the
         release has been completed.
 
 
@@ -181,3 +189,4 @@ Long version
 .. _PR#3099: https://github.com/OP-TEE/optee_os/pull/3099
 .. _Semantic Versioning 2.0.0: https://semver.org
 .. _mk/config.mk: https://github.com/OP-TEE/optee_os/blob/master/mk/config.mk
+.. _linaro-swg/linux.git: https://github.com/linaro-swg/linux.git
