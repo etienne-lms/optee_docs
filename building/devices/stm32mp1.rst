@@ -32,6 +32,8 @@ Supported boards
 Nand flash the system can boot on. OP-TEE distribution however only supports
 booting from the SDcard slot.
 
+.. _stm32mp1_build_instructions:
+
 Build instructions
 ******************
 
@@ -45,6 +47,27 @@ as listed in table below:
 +========================+======================================+
 | `STM32MP135F-DK`_      | ``PLATFORM=stm32mp1-135F_DK``        |
 +------------------------+--------------------------------------+
+| `STM32MP157A-DK1`_     | ``PLATFORM=stm32mp1-157A_DK1_SCMI``  |
+| `STM32MP157D-DK1`_     |                                      |
++------------------------+--------------------------------------+
+| `STM32MP157C-DK2`_     | ``PLATFORM=stm32mp1-157C_DK2_SCMI``  |
+| `STM32MP157F-DK2`_     |                                      |
++------------------------+--------------------------------------+
+| `STM32MP157C-EV1`_     | ``PLATFORM=stm32mp1-157C_EV1_SCMI``  |
+| `STM32MP157F-EV1`_     |                                      |
++------------------------+--------------------------------------+
+
+For compatibility with existing Linux kernel and U-Boot boards (DTS files),
+STM32MP15 flavors can also be built with RCC secure hardening disabled
+in which case some SoC main resources (clock and reset controllers) are
+assigned to non-secure world. These are listed in table below.
+
+Configuration switch ``PLATFORM`` can be used to specify the target device
+as listed in table below:
+
++------------------------+--------------------------------------+
+| Board Name             | Build configuration directive        |
++========================+======================================+
 | `STM32MP157A-DK1`      | ``PLATFORM=stm32mp1-157A_DK1``       |
 | `STM32MP157D-DK1`      |                                      |
 +------------------------+--------------------------------------+
@@ -75,6 +98,33 @@ A usual short fecth/build/load shell sequence is like the one below:
 Command ``sgdisk -e`` fixes the GPT backup data which location depends on
 storage device effective size.
 
+Build directives
+****************
+
+The main and mandatory build directive is ``PLATFORM`` value that states the
+platform and possibly its flavor. Table above, in section
+:ref:`stm32mp1_build_instructions`, lists value for ``PLATFORM`` supported
+by `stm32mp1.mk`_ makefile.
+
+STM32MP15 RCC security state
+============================
+
+One can note that there are 2 series of configurations for STM32MP15
+variants: with RCC security hardening enable (e.g.
+``PLATFORM=stm32mp1-157C_EV1_SCMI``) or disabled (e.g.
+``PLATFORM=stm32mp1-157C_EV1``).
+
+The STM32MP15 boards configurations with RCC security hardening enable
+assigns some main clock and reset controllers to the secure world.
+These configurations comply with U-Boot and Linux stm32mp157*-scmi.dts
+DTS board files where SCMI protocols are used to expose some secure
+SoC resources to non-secure world. Such a configuration is required
+when assigning SoC peripherals (crypto engines, hardware busses, etc...)
+to the secure world.
+
+Note that RCC secure hardening is always enabled on STM32MP13 platform
+flavors (``PLATFORM=stm32mp1-135F_DK``).
+
 .. _STM32MP135F-DK: https://www.st.com/en/evaluation-tools/stm32mp135f-dk.html
 .. _STM32MP157A-DK1: https://www.st.com/en/evaluation-tools/stm32mp157a-dk1.html
 .. _STM32MP157D-DK1: https://www.st.com/en/evaluation-tools/stm32mp157d-dk1.html
@@ -85,3 +135,4 @@ storage device effective size.
 .. _Wiki STM32MP135x-DK: https://wiki.st.com/stm32mpu/wiki/STM32MP135x-DK_-_hardware_description
 .. _Wiki STM32MP157x-DKx: https://wiki.st.com/stm32mpu/wiki/STM32MP157x-DKx_-_hardware_description
 .. _Wiki STM32MP157x-EV1: https://wiki.st.com/stm32mpu/wiki/STM32MP157x-EV1_-_hardware_description
+.. _stm32mp1.mk: https://github.com/OP-TEE/build/blob/master/stm32mp1.mk
