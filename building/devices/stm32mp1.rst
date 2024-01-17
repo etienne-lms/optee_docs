@@ -125,6 +125,51 @@ to the secure world.
 Note that RCC secure hardening is always enabled on STM32MP13 platform
 flavors (``PLATFORM=stm32mp1-135F_DK``).
 
+Standard build directive
+=========================
+
+Any ``CFG_*`` OP-TEE configuration directives can be passed to the build
+sequence as part of the make command line arguments. For example, one can
+override OP-TEE core log level with:
+
+.. code-block:: bash
+
+  $ make PLATFORM=stm32mp1-157C_DK2_SCMI CFG_TEE_CORE_LOG_LEVEL=0 all
+
+Any ``BR2_*`` Buildroot configuration directive can be passed to the
+build sequence as part of the make command line argument. For example,
+one can enable Buildroot busybox watchdog support with:
+
+.. code-block:: bash
+
+  $ make PLATFORM=stm32mp1-157C_DK2_SCMI BR2_PACKAGE_BUSYBOX_WATCHDOG=y all
+
+``WITH_RPMB_TEST`` build directive
+==================================
+
+OP-TEE distribution build script for stm32mp1 platforms supports
+configuration directive ``WITH_RPMB_TEST=y|n`` (default ``n``).
+
+When enabled, the platforms embeds OP-TEE's RPMB_FS secure storage
+(``CFG_RPMB_FS=y``) with test configuration directove (``CFG_RPMB_TESTKEY=y``
+and ``CFG_REE_FS_ALLOW_RESET=y``).
+
+This configuration can only be used with boards that have a physical RPMB
+provisioned with OP-TEE RPMB test key.
+
+``WITH_SRAM1_PAGER_POOL`` build directive
+=========================================
+
+OP-TEE distribution build script for stm32mp1 platforms supports
+configuration directive ``WITH_SRAM1_PAGER_POOL=y|n``.
+
+The configuration only relates the STM32MP15 boards when the platform
+embed OP-TEE pager support. When enabled, SRAM1 internal RAM is assigned
+to OP-TEE secure firmware and used a page pool by OP-TEE pager.
+
+``WITH_SRAM1_PAGER_POOL`` is default enabled for platform flavors
+``PLATFORM=stm32mp1-157C_*_SCMI`` and default disabled for other flavors.
+
 .. _STM32MP135F-DK: https://www.st.com/en/evaluation-tools/stm32mp135f-dk.html
 .. _STM32MP157A-DK1: https://www.st.com/en/evaluation-tools/stm32mp157a-dk1.html
 .. _STM32MP157D-DK1: https://www.st.com/en/evaluation-tools/stm32mp157d-dk1.html
